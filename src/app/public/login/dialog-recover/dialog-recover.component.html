@@ -1,0 +1,43 @@
+<div *ngIf="!loading" class="loading-spinner" class="contenedor">
+    <h2 class="titulo">¿Olvidaste tu Contraseña?</h2>
+    <h5 class="sub_titulo">Ingresa tu dirección de correo registrada. Te enviaremos un correo para que puedas crear una nueva contraseña.</h5>
+
+    <form [formGroup]="form">
+      <div class="tipo_login">
+        <div class="input_correo">
+          <mat-form-field
+            class="example-full-width mat_error_color"
+            [ngClass]="{ mat_error_border_color: validFormName('correo') }"
+            appearance="outline"
+          >
+            <mat-label [ngClass]="{ mat_label_error: validFormName('correo') }">
+              Direcci&oacute;n de correo electr&oacute;nico
+            </mat-label>
+            <input formControlName="correo" id="correo" type="correo" matInput />
+          </mat-form-field>
+          <div class="mat_error" *ngIf="validFormName('correo')">
+            <mat-error *ngIf="validHasError('correo') === 1">
+              Este campo es requerido
+            </mat-error>
+            <mat-error *ngIf="validHasError('correo') === 2">
+              Ingrese un correo válido
+            </mat-error>
+          </div>
+        </div>
+      </div>
+
+      <div mat-dialog-actions>
+        <button mat-raised-button class="btn-login-cancelar" color="primary" (click)="closeModal()"> Cancelar</button>
+        <button mat-raised-button class="btn-login-continuar" color="primary" (click)="sendEmail()"> Continuar</button>
+      </div>
+
+    </form>
+
+
+
+  </div>  
+
+
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>

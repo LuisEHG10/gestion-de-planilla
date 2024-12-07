@@ -1,0 +1,107 @@
+<main class="grid_login">
+    <div class="formulario">
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
+  
+        <h1 class="titulo">{{ tipo_form }} Perfil</h1>
+  
+        <button mat-raised-button class="btn-login" color="primary" type="button" (click)="toggleFormEditable()">
+          {{ isFormEditable ? 'Cancelar' : 'Actualizar' }}
+        </button>
+  
+        <div class="tipo_registro">
+          <div class="input_nombre">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombre" />
+            </mat-form-field>
+            <div class="mat_error" *ngIf="validFormName('nombre')">
+              <mat-error *ngIf="validHasError('nombre') === 1">Este campo es requerido</mat-error>
+            </div>
+          </div>
+  
+          <div class="input_apellido_paterno">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Apellido Paterno</mat-label>
+              <input matInput formControlName="apellidoPaterno" />
+            </mat-form-field>
+            <div class="mat_error" *ngIf="validFormName('apellidoPaterno')">
+              <mat-error *ngIf="validHasError('apellidoPaterno') === 1">Este campo es requerido</mat-error>
+            </div>
+          </div>
+  
+          <div class="input_apellido_materno">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Apellido Materno</mat-label>
+              <input matInput formControlName="apellidoMaterno" />
+            </mat-form-field>
+            <div class="mat_error" *ngIf="validFormName('apellidoMaterno')">
+              <mat-error *ngIf="validHasError('apellidoMaterno') === 1">Este campo es requerido</mat-error>
+            </div>
+          </div>
+  
+          <div class="input_dni">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>DNI</mat-label>
+              <input matInput formControlName="dni" />
+            </mat-form-field>
+            <div class="mat_error" *ngIf="validFormName('dni')">
+              <mat-error *ngIf="validHasError('dni') === 1">Este campo es requerido</mat-error>
+            </div>
+          </div>
+  
+          <div class="input_fecha_nacimiento">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Fecha de Nacimiento</mat-label>
+              <input matInput [matDatepicker]="fechaNacimientoPicker" (dateChange)="onDateSelected()"
+                formControlName="fechaNacimiento" />
+              <mat-datepicker-toggle matIconSuffix [for]="fechaNacimientoPicker"></mat-datepicker-toggle>
+              <mat-datepicker #fechaNacimientoPicker></mat-datepicker>
+            </mat-form-field>
+            <div class="mat_error" *ngIf="validFormName('fechaNacimiento')">
+              <mat-error *ngIf="validHasError('fechaNacimiento') === 1">Este campo es requerido</mat-error>
+            </div>
+          </div>
+  
+          <div class="input_telefono">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Teléfono</mat-label>
+              <input matInput formControlName="telefono" />
+            </mat-form-field>
+            <div class="mat_error" *ngIf="validFormName('telefono')">
+              <mat-error *ngIf="validHasError('telefono') === 1">Este campo es requerido</mat-error>
+            </div>
+          </div>
+  
+          <div class="input_email">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+            <div class="mat_error" *ngIf="validFormName('email')">
+              <mat-error *ngIf="validHasError('email') === 1">Este campo es requerido</mat-error>
+              <mat-error *ngIf="validHasError('email') === 2">Email incorrecto</mat-error>
+            </div>
+          </div>
+  
+          <div class="input_imagen">
+            
+              <mat-form-field class="example-full-width" appearance="outline" [ngClass]="{
+                  mat_error_border_color: validFormName('imagen')
+                }">
+                <input matInput readonly style="display: none" />
+                <input type="file" (change)="imagenFileSeleccionado($event)" accept="image/*" style="margin-bottom: 5px"
+                  formControlName="imagen" />
+              </mat-form-field>
+  
+  
+          </div>
+          <div class="image-container" style="text-align: center;">
+            <img *ngIf="imagenSeleccionada" [src]="imagenSeleccionada" alt="Imagen seleccionada" style="width: 200px;" />
+          </div>
+        </div>
+  
+        <button mat-raised-button class="btn-login" color="primary" type="submit" [hidden]="!isFormEditable">Guardar
+          Cambios</button>
+      </form>
+    </div>
+  </main>

@@ -1,0 +1,51 @@
+<div class="contenedor">
+  <div class="titulo">
+    <h2>Importación de Archivos</h2>
+    <hr />
+  </div>
+
+  <div class="import_planilla">
+    <h2>IMPORTACI&Oacute;N DE ARCHIVO DE CONCEPTOS MENSUALES - TXT</h2>
+
+    <div class="button_importar">
+      <div class="input_file">
+        <ng-container>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput readonly style="display: none" />
+            <input
+              #fileInput
+              type="file"
+              (change)="onChangeFile($event)"
+              accept=".txt"
+              style="margin-bottom: 5px"
+            />
+          </mat-form-field>
+        </ng-container>
+      </div>
+
+      <button mat-fab extended (click)="abrirDialogo()">Importar</button>
+    </div>
+  </div>
+
+  <div class="import_no_abonos">
+    <h2>IMPORTACI&Oacute;N DE ARCHIVO DE NO ABONOS - EXCEL</h2>
+    <div class="button_importar">
+      <div class="input_file">
+        <ng-container>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput readonly style="display: none" />
+            <input
+              #fileInput
+              type="file"
+              (change)="onChangeFile($event)"
+              accept=".txt"
+              style="margin-bottom: 5px"
+            />
+          </mat-form-field>
+        </ng-container>
+      </div>
+
+      <button mat-fab extended>Importar</button>
+    </div>
+  </div>
+</div>

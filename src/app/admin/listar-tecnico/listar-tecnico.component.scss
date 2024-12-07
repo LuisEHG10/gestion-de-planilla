@@ -1,0 +1,120 @@
+// Variables para colores
+$color-primary: #ff4d4d;
+$color-header-bg: #000;
+$color-header-text: #fff;
+$color-text: #000;
+$color-tecnico1-bg: green;
+$color-tecnico2-bg: red;
+$color-text-light: #999;
+
+// Variables para espaciado y tipografía
+$font-size-large: 2rem;
+$line-height-large: 2.5;
+$padding-small: 5px 10px;
+$border-radius: 20px;
+
+// Mixin para roles técnicos
+@mixin rol-tecnico($bg-color) {
+  background-color: $bg-color;
+  color: white;
+  padding: $padding-small;
+  border-radius: $border-radius;
+  font-weight: bold;
+  text-align: center;
+}
+
+// Estilos generales
+
+.titulo {
+  font-size: $font-size-large;
+  color: $color-primary;
+  font-weight: bold;
+  margin-bottom: 2.5%;
+  line-height: $line-height-large;
+  border-bottom: 2px solid $color-primary;
+}
+
+.table-container {
+  margin: 20px 0;
+}
+
+.custom-table {
+  width: 100%;
+}
+
+// Estilos para el encabezado (thead)
+::ng-deep {
+  tr.mat-header-row {
+    background-color: $color-header-bg !important;
+    color: $color-header-text !important;
+
+    .mat-header-cell {
+      font-weight: 600 !important;
+      color: $color-header-text !important;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+
+  // Estilos para el cuerpo (tbody)
+  tr.mat-row {
+    color: $color-text;
+    font-weight: 500;
+
+    .mat-cell {
+      color: $color-text !important;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+}
+
+// Estilos para los botones dentro de las celdas
+button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-icon {
+  font-size: 18px;
+}
+
+// Estilos del paginador
+.mat-paginator {
+  margin-top: 20px;
+}
+
+// Estilo para el mensaje de "no hay datos"
+.no-data {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: $color-text-light;
+  font-weight: bold;
+}
+
+// Estilos para roles técnicos
+.rol_tecnico1 {
+  @include rol-tecnico($color-tecnico1-bg);
+}
+
+.rol_tecnico2 {
+  @include rol-tecnico($color-tecnico2-bg);
+}
+
+.opciones{
+  display: flex;
+  .cambiar_rol{
+    margin-right: 15px;
+  }
+  .eliminar, .cambiar_rol{
+    position: relative;
+    mat-icon{
+      position: absolute; /* Establecer la posición como absoluta */
+      top: 50%;           /* Coloca el centro del div en el 50% de la altura */
+      left: 55%;          /* Coloca el centro del div en el 50% del ancho */
+      transform: translate(-50%, -50%);  /* Ajusta para centrar completamente */
+    }
+  }
+}

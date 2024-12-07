@@ -1,0 +1,22 @@
+<div class="main-content">
+    <header>
+      <h2>Menú Quinta Categoría</h2>
+    </header>
+  
+    <section class="reports-section">
+      <h3>Gestión de Reportes</h3>
+      
+      <div class="reports-container">
+        <div *ngFor="let report of reportItems" class="report-item">
+          <span>{{ report.label }}</span>
+        </div>
+      </div>
+  
+      <div class="actions">
+        <button class="btn-add" (click)="addReport()">+</button>
+        <button class="btn-excel" (click)="exportToExcel()">
+          <i class="excel-icon"></i>
+        </button>
+      </div>
+    </section>
+  </div>

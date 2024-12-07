@@ -1,0 +1,44 @@
+*{
+    color: black;
+}
+
+.contenedor{
+    padding: 20px;
+    h1{
+        font-size: 1.6rem;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+    }
+    button{
+        color: white;
+        font-weight: bold;
+        background-color: #56C6FB;
+    }
+    background-color: white;
+    .content{
+        padding-top: 20px;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 35% 35% 1fr;
+        p{
+            font-weight: bold;
+            padding: 15px;
+            font-size: 1.3rem;
+        }
+        .valor{
+            p{
+                border: 2px solid #56C6FB;
+                border-radius: 7px;
+            }
+        }
+    }
+}
+
+.loading-spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

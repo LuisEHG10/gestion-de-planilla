@@ -1,0 +1,110 @@
+mat-toolbar {
+  padding-right: 0 !important;
+  z-index: 1;
+  position: fixed;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+.rol_public {
+  &.mat-toolbar {
+    background: #fcfcfc;
+  }
+  a {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #295889;
+    &:hover {
+      transition: 0.1s;
+      color: #ff4d4d;
+    }
+  }
+  .icon-login {
+    padding-right: 25px;
+    cursor: pointer;
+    font-size: 30px;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #295889;
+    padding-right: 12%;
+    &:hover {
+      color: #ff4d4d;
+      transition: 0.1s;
+    }
+  }
+  .bg-hover2 {
+    color: #ff4d4d !important;
+  }
+  .logo {
+    padding-left: 25px !important;
+    span {
+      color: #295889;
+      padding-left: 12%;
+      font-family: Sailec-Medium !important;
+    }
+    img {
+      width: 90px;
+      filter: invert(50%) sepia(32%) saturate(3543%) hue-rotate(329deg)
+        brightness(99%) contrast(104%);
+    }
+  }
+}
+
+.rol_admin {
+  &.mat-toolbar {
+    background: #23282c;
+  }
+}
+
+.mat-mdc-button {
+  --mat-mdc-button-persistent-ripple-color: none;
+}
+.mdc-button {
+  height: 100%;
+}
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Debajo del ícono */
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 10;
+  padding: 5px 0;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+    text-align: left;
+    background: transparent;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+}
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.email{
+  padding-right: 10px;
+  cursor: pointer;
+  color: black;
+  font-size: 15px;
+}

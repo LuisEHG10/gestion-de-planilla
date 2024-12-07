@@ -1,0 +1,39 @@
+<mat-sidenav-container class="contenedor">
+  <mat-sidenav class="sidenav" #sidenav mode="side" opened>
+    <mat-toolbar class="titulo-menu" style="color: white; font-size: 1.2em;">Gesti&oacute;n de Administrador</mat-toolbar>
+    <ul>
+      <li><a mat-list-item routerLink="/tecnicos/gestion-carga" *ngIf="rolUser === 2">Gesti&oacute;n Carga</a></li> <!-- Tecnico 1 -->
+      <li><a mat-list-item routerLink="/tecnicos/calculador-individual" *ngIf="rolUser === 2 || rolUser === 3">Calculador Individual</a></li> <!-- Tecnico 1 o 2 -->
+      <li><a mat-list-item routerLink="/tecnicos/gestion-reportes" *ngIf="rolUser === 2 || rolUser === 3">Gesti&oacute;n Reportes</a></li> <!-- Tecnico 1 o 2 -->
+      <li><a mat-list-item routerLink="/admin/listar-tecnicos" *ngIf="rolUser === 1">Listar Tecnicos</a></li>  <!-- Administrador -->
+    </ul>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+
+    <mat-toolbar class="navbar" color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+
+      <div class="perfil" (click)="logout()" (mouseenter)="showMenu = true">
+        <span class="email" >Bienvenido, <b>{{token.nombre}}</b></span>
+        <img *ngIf="token!=null" [src]="imagenSeleccionada"  alt="" class="img-usuario">
+      </div>
+
+      <!-- Menú desplegable -->
+      <div *ngIf="showMenu"  class="dropdown-menu" (mouseleave)="showMenu = false">
+        <button mat-button (click)="verPerfil()" style="font-weight: bold;">Ver mi perfil</button>
+         <button mat-button (click)="logout()" style="font-weight: bold;">Cerrar sesión</button>
+      </div>
+    </mat-toolbar>
+
+    <div class="contenedor_body">
+      <div class="barra_lateral"></div>
+      <router-outlet class="router_outlet"></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

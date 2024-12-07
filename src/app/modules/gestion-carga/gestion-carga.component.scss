@@ -1,0 +1,47 @@
+.contenedor {
+  padding-top: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
+  .titulo {
+    margin-bottom: 30px;
+    h2 {
+      font-weight: bold;
+    }
+    hr {
+      width: 100%;
+      border: none;
+      height: 2px;
+      background-color: #5eafd3;
+      margin: 0;
+      opacity: 1;
+    }
+  }
+
+  .importacion {
+    border: 3px solid #5eafd3;
+    border-radius: 20px;
+    width: 75%;
+    padding: 20px;
+
+    h2 {
+      font-weight: bold;
+    }
+
+    button {
+      color: white;
+      font-weight: bold;
+      background-color: #5c95d4;
+      border-radius: 8px;
+    }
+  }
+
+  .import_planilla {
+    @extend .importacion;
+    margin-bottom: 60px;
+  }
+
+  .import_no_abonos {
+    @extend .importacion;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,33 @@
+<mat-toolbar *ngIf="!rolAdmin" color="primary" class="mat-elevation-z6" [ngClass]="{'rol_public': !rolAdmin}">
+    <div class="logo">
+        <span>GESTI&Oacute;N PLANILLA</span>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div (mouseenter)="showMenu = true" (mouseleave)="showMenu = false">
+    <!-- Email -->
+    <span *ngIf="token?.email" class="email" >
+        <b>Bienvenido, {{token.nombre}}</b>
+    </span>
+
+    <!-- Icono de perfil -->
+    <div class="icon-container" style="margin-right: 150px;" >
+        <mat-icon *ngIf="token?.email == null" [ngClass]="{ 'bg-hover2': pintar === 7 }" class="icon-login">
+            account_circle
+        </mat-icon>
+
+        <!-- Menú desplegable -->
+        <div *ngIf="showMenu" class="dropdown-menu">
+            <button mat-button (click)="logout()">Cerrar sesión</button>
+        </div>
+
+        <div class="perfil" *ngIf="token?.email">
+            <!-- Mostrar imagen de perfil -->
+            <img *ngIf="imagenSeleccionada" [src]="imagenSeleccionada" alt="user image" style="width: 50px; height: 50px; border-radius: 50%;">
+        </div>
+    </div>
+    </div>
+
+
+</mat-toolbar>

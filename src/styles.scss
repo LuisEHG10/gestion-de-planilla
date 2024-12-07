@@ -1,0 +1,76 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$proy-fe-citas-vet-primary: mat.define-palette(mat.$indigo-palette);
+$proy-fe-citas-vet-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$proy-fe-citas-vet-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$proy-fe-citas-vet-theme: mat.define-light-theme((
+  color: (
+    primary: $proy-fe-citas-vet-primary,
+    accent: $proy-fe-citas-vet-accent,
+    warn: $proy-fe-citas-vet-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($proy-fe-citas-vet-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+*:not(mat-icon){
+    margin: 0;
+    padding: 0;
+    font-family: Sailec-Thin !important;
+}
+
+
+@font-face {
+    font-family: 'Silka-Regular';
+    src: url('./assets/fonts/Sillka-regular.ttf') format('truetype');
+}
+
+
+//FONT FAMILY SAILEC
+@font-face {
+    font-family: 'Sailec-Light';
+    src: url('./assets/fonts/Sailec-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Sailec-Medium';
+    src: url('./assets/fonts/Sailec-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Sailec-Bold';
+    src: url('./assets/fonts/Sailec-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Sailec-Regular-Italic';
+    src: url('./assets/fonts/Sailec-Regular-Italic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Sailec-Thin';
+    src: url('./assets/fonts/Sailec-Thin.ttf') format('truetype');
+}
+
+

@@ -1,0 +1,103 @@
+*{
+    color: black;
+}
+
+.contenedor{
+    padding: 50px;
+    .titulo{
+      text-align: center;
+      color: #10365a;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .sub_titulo{
+      margin-bottom: 0;
+      font-size: 1.2rem;
+    }
+
+
+    .input_correo{
+      margin-top: -50px;
+    }
+
+    .tipo_login{
+      margin-top: 5rem;
+      mat-form-field {
+        width: 100%;
+        input {
+          color: #10365a;
+          font-weight: bold;
+        }
+        mat-label {
+          color: #10365a;
+          font-weight: bold;
+        }
+      }
+      .mat_error {
+        margin-top: -10px;
+        margin-bottom: 15px;
+        mat-error{
+          color: red !important;
+        }
+      }
+      .mat_label_error {
+        color: red !important;
+      }
+    }
+}
+
+// Cambiar color al borde al hacer Focus
+.mat_error_border_color {
+  ::ng-deep
+    .mdc-text-field--outlined:not(
+      .mdc-text-field--disabled
+    ).mdc-text-field--focused
+    .mdc-notched-outline__leading,
+  ::ng-deep
+    .mdc-text-field--outlined:not(
+      .mdc-text-field--disabled
+    ).mdc-text-field--focused
+    .mdc-notched-outline__notch,
+  ::ng-deep
+    .mdc-text-field--outlined:not(
+      .mdc-text-field--disabled
+    ).mdc-text-field--focused
+    .mdc-notched-outline__trailing {
+    border-color: red !important;
+  }
+}
+
+.mdc-dialog__actions{
+  padding: 0 !important;
+}
+
+
+@mixin btn-login($bg-color, $hover-color) {
+  height: 3rem;
+  width: 8rem;
+  font-weight: bold;
+  color: white;
+  background-color: $bg-color;
+  transition: background-color 0.1s ease;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+// Aplicación del mixin para cada botón
+.btn-login-cancelar {
+  @include btn-login(#10365a, #295889);
+}
+
+.btn-login-continuar {
+  @include btn-login(red, #ff4d4d);
+}
+
+.loading-spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
