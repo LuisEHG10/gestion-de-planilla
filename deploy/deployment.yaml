@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodejs-container
-        image: <DOCKER_USERNAME>/nombre-imagen:latest
+        image: <DOCKER_USERNAME>/luiseduardohg/nombre-imagen
         ports:
         - containerPort: 3000
 ---
