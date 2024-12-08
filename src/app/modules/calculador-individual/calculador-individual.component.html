@@ -20,57 +20,162 @@
   <div class="detalle-calculo">
     <h4 class="nombre_apellido" *ngIf="nombresApellidos != null">Nombres y apellidos: {{ nombresApellidos }}</h4>
     <hr>
-    <h3 class="titulo">INGRESOS MENSUALES Y PROYECCIÓN HASTA DICIEMBRE DE {{ currentYear }}</h3>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
-      <ng-container matColumnDef="periodo">
-        <th mat-header-cell *matHeaderCellDef> Periodo </th>
-        <td mat-cell *matCellDef="let element"> {{ element.periodo }} </td>
-      </ng-container>
 
-      <ng-container matColumnDef="conceptosFijos">
-        <th mat-header-cell *matHeaderCellDef> Conceptos Fijos </th>
-        <td mat-cell *matCellDef="let element"> {{ element.conceptosFijos }} </td>
-      </ng-container>
+    <div *ngIf="paso === 1">
+      <h3 class="titulo">INGRESOS MENSUALES Y PROYECCIÓN HASTA DICIEMBRE DE {{ currentYear }}</h3>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
+        <ng-container matColumnDef="periodo">
+          <th mat-header-cell *matHeaderCellDef> Periodo </th>
+          <td mat-cell *matCellDef="let element"> {{ element.periodo }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="conceptosFijos">
+          <th mat-header-cell *matHeaderCellDef> Conceptos Fijos </th>
+          <td mat-cell *matCellDef="let element"> {{ element.conceptosFijos || 'N/A' }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="bonificaciones">
+          <th mat-header-cell *matHeaderCellDef> Bonificaciones </th>
+          <td mat-cell *matCellDef="let element"> {{ element.bonificaciones }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="otrasEntidades">
+          <th mat-header-cell *matHeaderCellDef> Otras Entidades </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!editMode; else editModeTemplate">
+              {{ element.otrasEntidades }}
+            </ng-container>
+            <ng-template #editModeTemplate>
+              <input matInput [(ngModel)]="element.otrasEntidades" />
+            </ng-template>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="reintegros">
+          <th mat-header-cell *matHeaderCellDef> Reintegros </th>
+          <td mat-cell *matCellDef="let element"> {{ element.reintegros }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="totalMensual">
+          <th mat-header-cell *matHeaderCellDef> Total Mensual </th>
+          <td mat-cell *matCellDef="let element"> {{ element.totalPagar }} </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      </table>
 
-      <ng-container matColumnDef="bonificaciones">
-        <th mat-header-cell *matHeaderCellDef> Bonificaciones </th>
-        <td mat-cell *matCellDef="let element"> {{ element.bonificaciones }} </td>
-      </ng-container>
+      <div class="monto_anual">
+        <h3>PROYECCIÓN ANUAL DE INGRESOS TOTALES (A): <b>{{ totalAnual }}</b></h3>
+      </div>
+      </div>
 
-      <ng-container matColumnDef="otrasEntidades">
-        <th mat-header-cell *matHeaderCellDef> Otras Entidades </th>
-        <td mat-cell *matCellDef="let element">
-          <ng-container *ngIf="!editMode; else editModeTemplate">
-            {{ element.otrasEntidades }}
-          </ng-container>
-          <ng-template #editModeTemplate>
-            <input matInput [(ngModel)]="element.otrasEntidades" />
-          </ng-template>
-        </td>
-      </ng-container>
 
-      <ng-container matColumnDef="reintegros">
-        <th mat-header-cell *matHeaderCellDef> Reintegros </th>
-        <td mat-cell *matCellDef="let element"> {{ element.reintegros }} </td>
-      </ng-container>
+      <div *ngIf="paso === 2" class="grid_tables">
+        <div class="tabla1">
+          <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8 full-width">
+            <ng-container matColumnDef="periodo">
+              <th mat-header-cell *matHeaderCellDef> UIT PERIODO 2025
+                D.S.N° 309-2022-EF</th>
+              <td mat-cell *matCellDef="let element"> {{ element.periodo }} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="deduccion">
+              <th mat-header-cell *matHeaderCellDef> Deducción / Exoneración de 7 UIT (B)
+                (Art. 46° del TUO de la LIR. DS.N° 179-2004-EF) </th>
+              <td mat-cell *matCellDef="let element"> {{ element.deduccion }} </td>
+            </ng-container>
 
-      <ng-container matColumnDef="totalMensual">
-        <th mat-header-cell *matHeaderCellDef> Total Mensual </th>
-        <td mat-cell *matCellDef="let element"> {{ element.totalPagar }} </td>
-      </ng-container>
+            <ng-container matColumnDef="importe">
+              <th mat-header-cell *matHeaderCellDef> Importe neto anual sujeto a Impuesto a la Renta 
+                de Quinta Categoría (IRQC) (A-B) </th>
+              <td mat-cell *matCellDef="let element"> {{ element.importe }} </td>
+            </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          </table>
+        </div>
+        
 
-    </table>
-  </div>
+        <div class="tabla2">
+          <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 full-width">
+            
+            <!-- Columna RANGOS -->
+            <ng-container matColumnDef="rangos">
+              <th mat-header-cell *matHeaderCellDef> RANGOS DEDUCIBLES</th>
+              <td mat-cell *matCellDef="let element; let i = index" [attr.colspan]="(i === dataSource2.length - 1) ? '3' : null">
+                <!-- Mostrar solo en la última fila con el colspan -->
+                {{ element.rangos }}
+              </td>
+            </ng-container>
+        
+            <!-- Columna IMPORTE -->
+            <ng-container matColumnDef="importe">
+              <th mat-header-cell *matHeaderCellDef> IMPORTE NETO ANUAL SUJETO A IRQC DISTRIB. POR TASA </th>
+              <td mat-cell *matCellDef="let element; let i = index" [hidden]="i === dataSource2.length - 1">
+                {{ element.importe }}
+              </td>
+            </ng-container>
+        
+            <!-- Columna TASA -->
+            <ng-container matColumnDef="tasa">
+              <th mat-header-cell *matHeaderCellDef> TASA DEDUCCIÓN </th>
+              <td mat-cell *matCellDef="let element; let i = index" [hidden]="i === dataSource2.length - 1">
+                {{ element.tasa }}
+              </td>
+            </ng-container>
+        
+            <!-- Columna IRQC -->
+            <ng-container matColumnDef="irqc">
+              <th mat-header-cell *matHeaderCellDef> IRQC ANUAL POR TASA </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.irqc }}
+              </td>
+            </ng-container>
+        
+            <!-- Encabezado de la tabla -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+            
+            <!-- Filas de datos -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+          </table>
+        </div>
+        
+        
+        
 
-  <div class="monto_anual">
-    <h3>PROYECCIÓN ANUAL DE INGRESOS TOTALES (A): <b>{{ totalAnual }}</b></h3>
-  </div>
+        <div class="tabla3">
+          <table mat-table [dataSource]="dataSource3" class="mat-elevation-z8 full-width">
+            <ng-container matColumnDef="periodo">
+              <th mat-header-cell *matHeaderCellDef> PERIODO </th>
+              <td mat-cell *matCellDef="let element"> {{ element.periodo }} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="descuento">
+              <th mat-header-cell *matHeaderCellDef>  Desc. Mensual 
+                de 5° Categoría </th>
+              <td mat-cell *matCellDef="let element"> {{ element.descuento }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="situacion">
+              <th mat-header-cell *matHeaderCellDef> Situación </th>
+              <td mat-cell *matCellDef="let element"> {{ element.situacion }} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+          </table>
+        </div>
+
+      </div>      
+
+    </div>
+
 
   <div class="botones">
-    <button mat-raised-button color="accent" (click)="toggleEditMode()">Editar</button>
-    <button mat-raised-button color="warn">Finalizar</button>
+    <button mat-raised-button color="accent" (click)="toggleEditMode()"> {{ btnPaso }} </button>
+    <button mat-raised-button color="warn" (click)="next()">Siguiente</button>
   </div>
 </div>

@@ -19,6 +19,7 @@
   }
 
   .detalle-calculo {
+    padding: 25px;
     hr {
       height: 3px; /* Aumenta el grosor de la línea */
       background-color: #333; /* Cambia el color de fondo */
@@ -90,4 +91,32 @@
     justify-content: flex-end;
     gap: 8px;
   }
+}
+
+
+.grid_tables {
+  display: grid;
+  gap: 40px;
+  grid-template-areas:
+    "tabla1 tabla3"
+    "tabla2 tabla3";
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+}
+
+.tabla1 {
+  grid-area: tabla1;
+}
+
+.tabla2 {
+  grid-area: tabla2;
+}
+
+.tabla3 {
+  grid-area: tabla3;
+}
+
+.merged-cell {
+  text-align: center;
+  font-weight: bold;
+  background-color: #f0f0f0;
 }
