@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Node.js CI/CD
 
 on:
   push:
@@ -8,16 +8,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [20]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    # 1. Clonar el repositorio
     - uses: actions/checkout@v4
+
+    # 2. Configurar Node.js
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
@@ -25,43 +26,59 @@ jobs:
         cache: 'npm'
         cache-dependency-path: package-lock.json
 
+    # 3. Instalar dependencias
     - run: npm ci
+
+    # 4. Compilar el proyecto
     - name: Build
       run: npm run build
 
-    # Guardar los resultados de la compilación como un artifact
+    # 5. Guardar los resultados de la compilación como artifact
     - name: Upload build artifact
       uses: actions/upload-artifact@v3
       with:
         name: build-artifact
-        path: build/ # Cambia "build/" por el directorio donde se encuentra tu compilación
+        path: build/ # Cambiar "build/" según tu directorio de compilación
 
+  docker:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Descargar el artifact generado en el paso de build
+    - name: Download build artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: build-artifact
+        path: ./build/
+
+    # 2. Loguearse en Docker Hub
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Construir la imagen Docker
+    # 3. Construir la imagen Docker
     - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nombre-imagen:latest .
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nombre-imagen:latest ./build/
 
-    # Subir la imagen a Docker Hub
+    # 4. Subir la imagen a Docker Hub
     - name: Push Docker image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/nombre-imagen:latest
 
-  # Ejemplo de un segundo trabajo que utiliza el artifact
   deploy:
-    needs: build
+    needs: docker
     runs-on: ubuntu-latest
 
     steps:
+    # 1. Descargar el artifact generado
     - name: Download build artifact
       uses: actions/download-artifact@v3
       with:
         name: build-artifact
         path: ./deployed-artifact/
 
-    # Paso de ejemplo usando el artifact descargado
+    # 2. Realizar el despliegue
     - name: Deploy artifact
       run: echo "Deploying artifact from ./deployed-artifact/"
